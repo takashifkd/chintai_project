@@ -195,9 +195,10 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-# メールアドレス認証へ設定（ユーザー名は不使用）
+# メールアドレス認証へ設定
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = False
+# ユーザー名を使用
+ACCOUNT_USERNAME_REQUIRED = True
 
 # ユーザー登録時に確認メール送信は不要
 ACCOUNT_EMAIL_VERIFICATION = 'none'

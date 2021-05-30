@@ -1,0 +1,57 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Dashboard｜Chintai{% endblock %}
+
+
+{% block contents %}
+
+<h1 class="mt-4">Create</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
+  <li class="breadcrumb-item update">Create</li>
+</ol>
+<div class="card mb-4">
+  <div class="card-body">
+    <p class="mb-0">
+                <strong>説明：</strong><br>
+                こちらは賃貸業者が賃貸物件を新規登録するための機能となります。<br>
+                各項目を入力・選択し、新規作成ボタンを押下してください。<br>
+                &nbsp;賃料：月額賃料を想定しております。（例：月５万円→「50000」と入力）<br>
+                &nbsp;住所３:区内のさらに詳細な住所を入力してください。<br>
+                &nbsp;駅１徒歩:物件から最寄り駅１へ徒歩でかかる時間（分）を想定しております。（例：徒歩15分→「15」と入力）<br>
+                &nbsp;面積：賃貸物件の面積（㎡）を想定しております。（例：面積25㎡→「25」と入力）<br>
+            </p>
+  </div>
+</div>
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fas fa-table mr-1"></i>
+    管理物件新規作成
+  </div>
+  <div class="card-body">
+
+    <div class="m-1">
+      <a class="btn btn-primary" href="{% url 'dashboard:detail' %}">戻る</a>
+    </div>
+    <div class="containter">
+      <div class="row">
+        <div class="my-div-style w-100">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table">
+              {{ form.as_table }}
+            </table>
+            <button class="btn btn-primary" type="submit">新規作成</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card mb-4">
+  <div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div>
+</div>
+
+
+
+{% endblock %}

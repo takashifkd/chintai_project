@@ -1,0 +1,29 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Dashboard｜Chintai{% endblock %}
+
+
+{% block contents %}
+<h1 class="mt-4">Home</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
+    <li class="breadcrumb-item active">Home</li>
+</ol>
+<div class="card mb-4">
+    <div class="card-body">
+        <p class="mb-0">
+                <strong>説明：</strong><br>
+                こちらは賃貸業者が賃貸物件の管理をシミュレーションするための機能となります。<br>
+                左サイドメニューより各機能へ移動してください。<br>
+                左サイドメニュー各機能：<br>
+                ①掲載物件：ログインしている業者が管理している物件リストを表示します。<br>
+                ②お問い合わせ対応：お客様からのお問い合わせリストを表示します。<br>
+                ③ログアウト：ログアウトします。
+            </p>
+    </div>
+</div>
+<div style="height: 100vh"></div>
+<div class="card mb-4">
+    <div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div>
+</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Dashboard｜Chintai{% endblock %}
+
+
+{% block contents %}
+<h1 class="mt-4">PropertyDetail</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
+    <li class="breadcrumb-item active">PropertyDetail</li>
+</ol>
+<div class="card mb-4">
+    <div class="card-body">
+        DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+        <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+        .
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        管理物件詳細
+    </div>
+    <div class="card-body">
+        <div class="my-div-style w-100">
+            <div class="m-1">
+                <a class="btn btn-primary" href="{% url 'dashboard:list' %}">管理物件リストへ戻る</a>
+                <a class="btn btn-primary" href="{% url 'dashboard:update' object.pk %}">編集</a>
+                <a class="btn btn-danger" href="{% url 'dashboard:delete' object.pk %}">削除</a>
+            </div>
+
+            <!-- 物件名 -->
+            <div class="row">
+                <div class="col-3">
+                    <strong>物件名</strong>
+                </div>
+            </div>
+            <div class="col-９">
+                &nbsp;&nbsp;{{ object.prooerty_name }}
+
+            </div><!-- 賃貸用 -->
+            <div class="row">
+                <div class="col-3">
+                    <strong>賃貸料</strong>
+                </div>
+            </div>
+            <div class="col-９">
+                &nbsp;&nbsp;{{ object.rent }}円
+            </div>
+
+            <!-- 住所 -->
+            <div class="row">
+                <div class="col-3">
+                    <strong>住所</strong>
+                </div>
+            </div>
+            <div class="col-９">
+                &nbsp;&nbsp;{{ object.address1 }}　{{ object.address2 }}　{{ object.address3 }}
+            </div>
+
+            <!-- 最寄り駅 -->
+            <div class="row">
+                <div class="col-3">
+                    <strong>最寄り駅</strong>
+                </div>
+            </div>
+            <div class="col-９">
+                &nbsp;&nbsp;{{ object.nearest_sta1 }}駅
+            </div>
+
+            <!-- 駅徒歩 -->
+            <div class="row">
+                <div class="col-3">
+                    <strong>駅徒歩</strong>
+                </div>
+            </div>
+            <div class="col-９">
+                &nbsp;&nbsp;{{ object.min_walk_from_sta1 }}分
+            </div>
+
+            <!-- 面積 -->
+            <div class="row">
+                <div class="col-3">
+                    <strong>面積</strong>
+                </div>
+            </div>
+            <div class="col-９">
+                &nbsp;&nbsp;{{ object.area }}㎡
+            </div>
+
+            <!-- 間取り -->
+            <div class="row">
+                <div class="col-3">
+                    <strong>間取り</strong>
+                </div>
+            </div>
+            <div class="col-９">
+                &nbsp;&nbsp;{{ object.layout }}
+            </div>
+
+            <!-- その他条件 -->
+            <div class="row">
+                <div class="col-3">
+                    <strong>その他条件</strong>
+                </div>
+            </div>
+            <div class="col-９">
+                {% if object.is_separated is True %}
+                &nbsp;&nbsp;バストイレ別<br>
+                {% else %}
+                &nbsp;&nbsp;ユニットバス<br>
+                {% endif %}
+                <!--{{ object.is_separated }}<br>-->
+                {% if object.has_indoor_laundry_space is True %}
+                &nbsp;&nbsp;室内洗濯機置場あり<br>
+                {% else %}
+                &nbsp;&nbsp;室内洗濯機置場なし<br>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

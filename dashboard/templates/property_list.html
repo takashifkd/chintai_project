@@ -1,0 +1,119 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Dashboard｜Chintai{% endblock %}
+
+
+{% block contents %}
+<h1 class="mt-4">PropertyList</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
+    <li class="breadcrumb-item active">PropertyList</li>
+</ol>
+<div class="card mb-4">
+    <div class="card-body">
+        <p class="mb-0">
+            <strong>説明：</strong><br>
+            こちらは各賃貸業者が管理する賃貸物件のリストを表示するための機能となります。<br>
+            各ボタンリンク先説明：<br>
+            ①新規作成：管理物件を新規作成するフォームへ移動します。<br>
+            ②詳細：各物件の詳細情報を表示します。<br>
+            ③
+        </p>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        管理物件リスト
+    </div>
+    <div class="card-body">
+        <div class="m-1">
+            <a class="btn btn-primary" href="{% url 'dashboard:index' %}">Homeへ戻る</a>
+            <a class="btn btn-primary" href="{% url 'dashboard:create' %}">新規作成</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>物件名</th>
+                        <th>賃貸料（円）</th>
+                        <th>住所</th>
+                        <th>最寄り駅</th>
+                        <th>駅徒歩（分）</th>
+                        <th>面積</th>
+                        <th>作成日時</th>
+                        <th>更新日時</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>物件名</th>
+                        <th>賃貸料（円）</th>
+                        <th>住所</th>
+                        <th>最寄り駅</th>
+                        <th>駅徒歩（分）</th>
+                        <th>面積</th>
+                        <th>作成日時</th>
+                        <th>更新日時</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for property in object_list %}
+                    <tr>
+                        <td>{{ property.prooerty_name }}</td>
+                        <td>{{ property.rent }}</td>
+                        <td>{{ property.address2 }} {{ property.address3 }}</td>
+                        <td>{{ property.nearest_sta1 }}</td>
+                        <td>{{ property.min_walk_from_sta1 }}</td>
+                        <td>{{ property.area }}</td>
+                        <td>{{ property.created_at }}</td>
+                        <td>{{ property.updated_at }}</td>
+                        <td><a class="btn btn-primary" href="{% url 'dashboard:detail' property.pk %}">詳細</a></td>
+                    </tr>
+                    {% empty %}
+                    <p>掲載物件はありません</p>
+                    {% endfor %}
+
+                    <!-- ページネーション処理 -->
+                    {% if is_pagination %}
+                    <ul class="pagination">
+                        <!-- 前ページへのリンク -->
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{{ page_obj.previous_page_number }}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        <!-- ページ数表示 -->
+                        {% for page_num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == page_num %}
+                        <li class="page-item active">
+                            <a class="page-link" href="#">{{ page_num }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{{ page_num }}">{{ page_num }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+
+                        <!-- 次ページへのリンク -->
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

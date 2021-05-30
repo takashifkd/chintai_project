@@ -1,0 +1,45 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Dashboard｜Chintai{% endblock %}
+
+
+{% block contents %}
+<h1 class="mt-4">PropertyDelete</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
+    <li class="breadcrumb-item active">PropertyDelete</li>
+</ol>
+<div class="card mb-4">
+    <div class="card-body">
+        <p class="mb-0">
+            <strong>説明：</strong><br>
+            こちらは賃貸業者が掲載している賃貸物件を削除するための機能となります。<br>
+            物件情報を削除して問題なければ、削除ボタンを押下してください。<br>
+            この操作で削除した情報は元に戻すことはできません。（再度新規作成して下さい）<br>
+            キャンセルボタンを押下することで物件詳細画面へ戻ることができます。<br>
+        </p>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        管理物件削除
+    </div>
+    <div class="card-body">
+        <div class="my-div-style w-100">
+            <div class="containter">
+                <div class="row">
+                    <div class="my-div-style w-100">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <p><strong>「{{ object.prooerty_name }}」</strong>の物件情報を本当に削除しますか？</p>
+                            <button class="btn btn-primary mt-5" type="submit">削除</button>
+                            <a class="btn btn-secondary mt-5 ml-2" href="{% url 'dashboard:detail' object.pk %}">キャンセル</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
